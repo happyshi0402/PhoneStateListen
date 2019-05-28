@@ -29,12 +29,13 @@ public class PhoneStateReceiver extends BroadcastReceiver {
             // 来电去电都会走
             // 获取当前电话状态
             String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-            Log.d(PhoneListenService.TAG, "PhoneStateReceiver onReceive state: " + state);
+            Log.e(PhoneListenService.TAG, "PhoneStateReceiver onReceive state: " + state);
 
             // 获取电话号码
             String extraIncomingNumber = intent.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
             Log.d(PhoneListenService.TAG, "PhoneStateReceiver onReceive extraIncomingNumber: " + extraIncomingNumber);
 
+            DD.send("PhoneStateReceiver onReceive state:" + state+"; extraIncomingNumber: " + extraIncomingNumber);
             if (state.equalsIgnoreCase(TelephonyManager.EXTRA_STATE_RINGING)) {
                 Log.d(PhoneListenService.TAG, "PhoneStateReceiver onReceive endCall");
                 HangUpTelephonyUtil.endCall(context);
